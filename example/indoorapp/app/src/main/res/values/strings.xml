@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Indoor app</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+</resources>
