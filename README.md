@@ -36,6 +36,7 @@ Use `IndoorCloudManagerFactory` to get objects for communicating with our cloud.
 You will need `Location` objects to start indoor positioning, so this step is really important.
 
 ```Kotlin
+// KOTLIN
 val cloudManager = IndoorCloudManagerFactory().create(applicationContext)
 cloudManager.getLocation("your location id here", object : CloudCallback<Location> {
   override fun success(locations: Location?) {
@@ -46,6 +47,25 @@ cloudManager.getLocation("your location id here", object : CloudCallback<Locatio
     // handle error here             
   }
 })
+```
+```Java
+// JAVA
+IndoorCloudManager cloudManager = new IndoorCloudManagerFactory().create(this);
+  cloudManager.getLocation("your-location-id-here", new CloudCallback<Location>() {
+    @Override
+    public void success(Location location) {
+      // do something with your Location object here.
+      // You will need it to initialise IndoorLocationManager!
+      indoorLocationView = (IndoorLocationView) findViewById(R.id.indoor_view);
+      indoorLocationView.setLocation(location);
+    }
+
+    @Override
+    public void failure(EstimoteCloudException e) {
+      // oops!
+    }
+});
+
 ```
 
 ## 4. Adding indoor location view
@@ -62,22 +82,40 @@ Use `IndoorLocationView` to display your location on screen. You need to put it 
 ...
 ```
 Then you can simply bind this view to an object in your activity:
+
 ```Kotlin
+// KOTLIN
 indoorLocationView = findViewById(R.id.indoor_view) as IndoorLocationView
 // Don't forget to init view with your Location object!
 indoorLocationView.setLocation(location)
+```
+
+```Java
+// JAVA
+IndoorLocationView indoorLocationView = (IndoorLocationView) findViewById(R.id.indoor_view);
+indoorLocationView.setLocation(location);
 ```
 ## 5. Setting up indoor location manager
 `IndoorLocationManager` is the object that does all the magic to provide you with a user's estimated position.
 You need to initialize it with your application `Context` and—of course—`Location` objects.
 ```Kotlin
+// KOTLIN
 indoorLocationManager = IndoorLocationManager.create(applicationContext, mLocation)
+```
+```Java
+// JAVA
+IndoorLocationManager indoorLocationManager =  IndoorLocationManager.Companion.create(this, location);
 ```
 
 ## 6. Setting up beacon manager
 In order for `IndoorLocationManager` to work properly, it needs to be fed data about the scanned beacons. And guess what? We'll use our `BeaconManager` for that!
 ```Kotlin
+// KOTLIN
 beaconManager = BeaconManager(this)
+```
+```Java
+// JAVA
+BeaconManager beaconManager = new BeaconManager(this);
 ```
 
 ## 7. Connect all the parts together
@@ -85,15 +123,18 @@ So we now have separate objects for handling View drawing, position calculating,
 Now we need to connect them all together to create a magical experience for your users!
 But don't worry, we are prepared for that! In most cases you should use our `EstimoteIndoorHelper` that sets up the data flow between all of the elements.
 ```Kotlin
-// Use the helper below to quickly setup listeners between BeaconManager -> LocationManager -> LocationView
-// It also configures BeaconManager scanning with the best scan times for indoor positioning.
-// CUSTOMIZATION - if you want to customize this setup, feel free to do it manually.
+// KOTLIN
 EstimoteIndoorHelper.setupIndoorPositioning(beaconManager, indoorLocationManager, indoorLocationView)
+```
+```Java
+// JAVA
+EstimoteIndoorHelper.Companion.setupIndoorPositioning(beaconManager, indoorLocationManager, indoorLocationView);
 ```
 
 ## 8. Start!
 Now we're ready to start positioning. Use code like this in your Activity's `onStart` method:
 ```Kotlin
+// KOTLIN
 ...
  override fun onStart() {
         super.onStart()
@@ -109,8 +150,27 @@ Now we're ready to start positioning. Use code like this in your Activity's `onS
     }
 ...
 ```
+```Java
+// JAVA
+...
+ @Override
+  protected void onStart() {
+    super.onStart();
+    // BeaconManager needs to connect to the underlying Service,
+    // this is why we use connect() method first.
+    beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+      @Override
+      public void onServiceReady() {
+        beaconManager.startLocationDiscovery();
+        indoorLocationManager.startPositioning();
+      }
+    });
+  }
+...
+```
 and don't forget to stop using the `onStop` method!
 ```Kotlin
+// KOTLIN
 ...
  override fun onStop() {
         super.onStop()
@@ -121,6 +181,21 @@ and don't forget to stop using the `onStop` method!
         // ... and let LocationManager stop, too!
         indoorLocationManager.stopPositioning()
     }
+...
+```
+```Java
+// JAVA
+...
+ @Override
+  protected void onStop() {
+    super.onStop();
+    // Stop discovery for Location packets
+    beaconManager.stopLocationDiscovery();
+    // Disconnect BeaconManager from underlying bluetooth Service
+    beaconManager.disconnect();
+    // ... and let LocationManager stop, too!
+    indoorLocationManager.stopPositioning();
+  }
 ...
 ```
 ## Your feedback and questions
