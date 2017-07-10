@@ -136,51 +136,51 @@ Now we're ready to start positioning. Use code like this in your Activity's `onS
 ```Kotlin
 // KOTLIN
 ...
- override fun onStart() {
-        super.onStart()
-        // BeaconManager needs to connect to the underlying Service,
-        // this is why we use connect() method first.
-        beaconManager.connect {
-            // After BeaconManager has established connection with Service, 
-            // we start Location Packet Discovery
-            beaconManager.startLocationDiscovery()
-            // ... and inform the LocationManager to start doing its magic :)
-            indoorLocationManager.startPositioning()
-        }
-    }
+override fun onStart() {
+  super.onStart()
+  // BeaconManager needs to connect to the underlying Service, 
+  // this is why we use connect() method first.
+  beaconManager.connect {
+  // After BeaconManager has established connection with Service, 
+  // we start Location Packet Discovery
+  beaconManager.startLocationDiscovery()
+  // ... and inform the LocationManager to start doing its magic :)
+  indoorLocationManager.startPositioning()
+  }
+}
 ...
 ```
 ```Java
 // JAVA
 ...
- @Override
-  protected void onStart() {
-    super.onStart();
-    // BeaconManager needs to connect to the underlying Service,
-    // this is why we use connect() method first.
-    beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
-      @Override
-      public void onServiceReady() {
-        beaconManager.startLocationDiscovery();
-        indoorLocationManager.startPositioning();
-      }
-    });
-  }
+@Override
+protected void onStart() {
+  super.onStart();
+  // BeaconManager needs to connect to the underlying Service,
+  // this is why we use connect() method first.
+  beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+    @Override
+    public void onServiceReady() {
+      beaconManager.startLocationDiscovery();
+      indoorLocationManager.startPositioning();
+    }
+  });
+}
 ...
 ```
 and don't forget to stop using the `onStop` method!
 ```Kotlin
 // KOTLIN
 ...
- override fun onStop() {
-        super.onStop()
-        // Stop discovery for Location packets
-        beaconManager.stopLocationDiscovery()
-        // Disconnect BeaconManager from underlying bluetooth Service
-        beaconManager.disconnect()
-        // ... and let LocationManager stop, too!
-        indoorLocationManager.stopPositioning()
-    }
+override fun onStop() {
+  super.onStop()
+  // Stop discovery for Location packet
+  beaconManager.stopLocationDiscovery()
+  // Disconnect BeaconManager from underlying bluetooth Service
+  beaconManager.disconnect()
+  // ... and let LocationManager stop, too!
+  indoorLocationManager.stopPositioning() 
+ }
 ...
 ```
 ```Java
