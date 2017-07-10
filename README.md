@@ -198,6 +198,9 @@ override fun onStop() {
   }
 ...
 ```
+## Documentation
+[Javadoc documentation is available here](https://estimote.github.io/Android-Indoor-SDK/docs/index.html)
+
 ## Your feedback and questions
 At Estimote we're massive believers in feedback! Here are some common ways to share your thoughts with us:
   - Posting issue/question/enhancement on our [issues page](https://github.com/Estimote/Android-indoor-SDK/issues).
