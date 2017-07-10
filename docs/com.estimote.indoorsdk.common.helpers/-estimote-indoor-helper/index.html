@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>EstimoteIndoorHelper - estimote-indoor-sdk-android</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">estimote-indoor-sdk-android</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.indoorsdk.common.helpers</a>&nbsp;/&nbsp;<a href=".">EstimoteIndoorHelper</a><br/>
+<br/>
+<h1>EstimoteIndoorHelper</h1>
+<code><span class="keyword">class </span><span class="identifier">EstimoteIndoorHelper</span></code>
+<p>Helper for setting up connections between <a href="../../com.estimote.indoorsdk.algorithm/-indoor-location-manager/index.html">IndoorLocationManager</a>, <a href="../../com.estimote.indoorsdk.view/-indoor-location-view/index.html">IndoorLocationView</a> and <a href="#">BeaconManager</a>.
+It hooks necessary listeners for you, so the whole system will provide you with complete experience.
+If you need to do some custom setup, you would need to setup all listeners by yourself.
+The flow is rather simple:</p>
+<ol><li>Beacon manager scans for beacons</li>
+<li>IndoorLocationManager converts scanned beacons data to (x,y) coordinates</li>
+<li>IndoorLocationView draws (x,y) on your screen.</li>
+</ol>
+<p><strong>Author</strong><br/>
+Pawel Dylag (pawel.dylag@estimote.com)</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">EstimoteIndoorHelper</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Helper for setting up connections between <a href="../../com.estimote.indoorsdk.algorithm/-indoor-location-manager/index.html">IndoorLocationManager</a>, <a href="../../com.estimote.indoorsdk.view/-indoor-location-view/index.html">IndoorLocationView</a> and <a href="#">BeaconManager</a>.
+It hooks necessary listeners for you, so the whole system will provide you with complete experience.
+If you need to do some custom setup, you would need to setup all listeners by yourself.
+The flow is rather simple:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-i-n-d-o-o-r_-f-o-r-e-g-r-o-u-n-d_-s-c-a-n_-m-i-l-l-i-s.html">INDOOR_FOREGROUND_SCAN_MILLIS</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">INDOOR_FOREGROUND_SCAN_MILLIS</span><span class="symbol">: </span><span class="identifier">Long</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-i-n-d-o-o-r_-f-o-r-e-g-r-o-u-n-d_-w-a-i-t_-m-i-l-l-i-s.html">INDOOR_FOREGROUND_WAIT_MILLIS</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">INDOOR_FOREGROUND_WAIT_MILLIS</span><span class="symbol">: </span><span class="identifier">Long</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="setup-indoor-positioning.html">setupIndoorPositioning</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setupIndoorPositioning</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.common.helpers.EstimoteIndoorHelper.Companion$setupIndoorPositioning(com.estimote.coresdk.service.BeaconManager, com.estimote.indoorsdk.algorithm.IndoorLocationManager, com.estimote.indoorsdk.view.IndoorLocationView)/beaconManager">beaconManager</span><span class="symbol">:</span>&nbsp;<span class="identifier">BeaconManager</span><span class="symbol">, </span><span class="identifier" id="com.estimote.indoorsdk.common.helpers.EstimoteIndoorHelper.Companion$setupIndoorPositioning(com.estimote.coresdk.service.BeaconManager, com.estimote.indoorsdk.algorithm.IndoorLocationManager, com.estimote.indoorsdk.view.IndoorLocationView)/indoorLocationManager">indoorLocationManager</span><span class="symbol">:</span>&nbsp;<a href="../../com.estimote.indoorsdk.algorithm/-indoor-location-manager/index.html"><span class="identifier">IndoorLocationManager</span></a><span class="symbol">, </span><span class="identifier" id="com.estimote.indoorsdk.common.helpers.EstimoteIndoorHelper.Companion$setupIndoorPositioning(com.estimote.coresdk.service.BeaconManager, com.estimote.indoorsdk.algorithm.IndoorLocationManager, com.estimote.indoorsdk.view.IndoorLocationView)/indoorLocationView">indoorLocationView</span><span class="symbol">:</span>&nbsp;<a href="../../com.estimote.indoorsdk.view/-indoor-location-view/index.html"><span class="identifier">IndoorLocationView</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

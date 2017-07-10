@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.estimote.indoorsdk.algorithm - estimote-indoor-sdk-android</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">estimote-indoor-sdk-android</a>&nbsp;/&nbsp;<a href=".">com.estimote.indoorsdk.algorithm</a><br/>
+<br/>
+<h2>Package com.estimote.indoorsdk.algorithm</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-indoor-location-manager/index.html">IndoorLocationManager</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">IndoorLocationManager</span></code>
+<p>Main object for estimating position from scanned beacons.
+You should provide it with scanned beacons using method <a href="-indoor-location-manager/on-scanned-packets.html">IndoorLocationManager.onScannedPackets</a>
+Data about scanned beacons can be acquired from from <a href="#">BeaconManager</a>
+Computed (x,y) coordinates will be delivered to your listener - don't forget to set it using <a href="-indoor-location-manager/set-on-position-update-listener.html">IndoorLocationManager.setOnPositionUpdateListener</a>!
+You can use <a href="../com.estimote.indoorsdk.common.helpers/-estimote-indoor-helper/setup-indoor-positioning.html">EstimoteIndoorHelper.setupIndoorPositioning</a> to quickly setup listeners between view, manager and beacon scanner.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-on-position-update-listener/index.html">OnPositionUpdateListener</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">OnPositionUpdateListener</span></code>
+<p>Listener for delegating (x,y) coordinates from <a href="-indoor-location-manager/index.html">IndoorLocationManager</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>IndoorCloudManager - estimote-indoor-sdk-android</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">estimote-indoor-sdk-android</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.indoorsdk.cloud</a>&nbsp;/&nbsp;<a href=".">IndoorCloudManager</a><br/>
+<br/>
+<h1>IndoorCloudManager</h1>
+<code><span class="keyword">interface </span><span class="identifier">IndoorCloudManager</span></code>
+<p>This is basic interface for communicating with Estimote Indoor Cloud.
+To acquire concrete object use <a href="../-indoor-cloud-manager-factory/create.html">IndoorCloudManagerFactory.create</a> method.</p>
+<p><strong>See Also</strong><br/>
+<p><a href="../-indoor-cloud-manager-factory/index.html">IndoorCloudManagerFactory</a></p>
+</p>
+<p><strong>Author</strong><br/>
+Pawel Dylag (pawel.dylag@estimote.com)</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-all-locations.html">getAllLocations</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getAllLocations</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.cloud.IndoorCloudManager$getAllLocations(com.estimote.coresdk.cloud.api.CloudCallback((kotlin.collections.List((com.estimote.indoorsdk.cloud.Location)))))/callback">callback</span><span class="symbol">:</span>&nbsp;<span class="identifier">CloudCallback</span><span class="symbol">&lt;</span><span class="identifier">List</span><span class="symbol">&lt;</span><a href="../-location/index.html"><span class="identifier">Location</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Fetch all locations connected to your account.
+Remember to init our SDK with your AppId/AppToken first.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-location.html">getLocation</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getLocation</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.cloud.IndoorCloudManager$getLocation(kotlin.String, com.estimote.coresdk.cloud.api.CloudCallback((com.estimote.indoorsdk.cloud.Location)))/locationId">locationId</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="com.estimote.indoorsdk.cloud.IndoorCloudManager$getLocation(kotlin.String, com.estimote.coresdk.cloud.api.CloudCallback((com.estimote.indoorsdk.cloud.Location)))/callback">callback</span><span class="symbol">:</span>&nbsp;<span class="identifier">CloudCallback</span><span class="symbol">&lt;</span><a href="../-location/index.html"><span class="identifier">Location</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Fetch location with given id from Estimote Indoor Cloud.
+Remember to init our SDK with your AppId/AppToken first.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

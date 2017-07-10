@@ -1,0 +1,7 @@
+$dokka.format:html
+$dokka.linkExtension:html
+
+com.estimote.indoorsdk.algorithm
+com.estimote.indoorsdk.cloud
+com.estimote.indoorsdk.common.helpers
+com.estimote.indoorsdk.view

@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>IndoorLocationView - estimote-indoor-sdk-android</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">estimote-indoor-sdk-android</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.indoorsdk.view</a>&nbsp;/&nbsp;<a href=".">IndoorLocationView</a><br/>
+<br/>
+<h1>IndoorLocationView</h1>
+<code><span class="keyword">class </span><span class="identifier">IndoorLocationView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a></code>
+<p>Main view for drawing location (walls, beacons, objects, etc.) and user position on it.
+You need to declare it in your XML layout file first and then traditionally bind it to an object.</p>
+<p><strong>Author</strong><br/>
+Pawel Dylag (pawel.dylag@estimote.com)</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">IndoorLocationView</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.view.IndoorLocationView$<init>(android.content.Context)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span></code><br/>
+<code><span class="identifier">IndoorLocationView</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.view.IndoorLocationView$<init>(android.content.Context, android.util.AttributeSet)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.estimote.indoorsdk.view.IndoorLocationView$<init>(android.content.Context, android.util.AttributeSet)/attrs">attrs</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/util/AttributeSet.html"><span class="identifier">AttributeSet</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="on-draw.html">onDraw</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onDraw</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.view.IndoorLocationView$onDraw(android.graphics.Canvas)/canvas">canvas</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/graphics/Canvas.html"><span class="identifier">Canvas</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="set-border-paint.html">setBorderPaint</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setBorderPaint</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.view.IndoorLocationView$setBorderPaint(android.graphics.Paint)/paint">paint</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/graphics/Paint.html"><span class="identifier">Paint</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Sets the color of location's walls.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-custom-points.html">setCustomPoints</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setCustomPoints</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.view.IndoorLocationView$setCustomPoints(kotlin.collections.List((com.estimote.indoorsdk.cloud.LocationPosition)))/points">points</span><span class="symbol">:</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><a href="../../com.estimote.indoorsdk.cloud/-location-position/index.html"><span class="identifier">LocationPosition</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Draws set of custom points on view.
+This method is used rather for debugging, but you can draw your custom points with it.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-location.html">setLocation</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setLocation</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.view.IndoorLocationView$setLocation(com.estimote.indoorsdk.cloud.Location)/location">location</span><span class="symbol">:</span>&nbsp;<a href="../../com.estimote.indoorsdk.cloud/-location/index.html"><span class="identifier">Location</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Set the Location object for this view.
+You need to provide the view with location to draw.
+You can acquire <a href="../../com.estimote.indoorsdk.cloud/-location/index.html">Location</a> objects from <a href="../../com.estimote.indoorsdk.cloud/-indoor-cloud-manager/index.html">IndoorCloudManager</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="update-position.html">updatePosition</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">updatePosition</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.view.IndoorLocationView$updatePosition(com.estimote.indoorsdk.cloud.LocationPosition)/position">position</span><span class="symbol">:</span>&nbsp;<a href="../../com.estimote.indoorsdk.cloud/-location-position/index.html"><span class="identifier">LocationPosition</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Call this method when you get the position from <a href="../../com.estimote.indoorsdk.algorithm/-indoor-location-manager/index.html">IndoorLocationManager</a>.
+This will update user's icon position on this view.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
