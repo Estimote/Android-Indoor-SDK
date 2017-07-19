@@ -10,10 +10,10 @@
 <h1>IndoorLocationManager</h1>
 <code><span class="keyword">interface </span><span class="identifier">IndoorLocationManager</span></code>
 <p>Main object for estimating position from scanned beacons.
-You should provide it with scanned beacons using method <a href="on-scanned-packets.html">IndoorLocationManager.onScannedPackets</a>
+You should provide it with scanned beacons using method <a href="#">IndoorLocationManager.onScannedPackets</a>
 Data about scanned beacons can be acquired from from <a href="#">BeaconManager</a>
 Computed (x,y) coordinates will be delivered to your listener - don't forget to set it using <a href="set-on-position-update-listener.html">IndoorLocationManager.setOnPositionUpdateListener</a>!
-You can use <a href="../../com.estimote.indoorsdk.common.helpers/-estimote-indoor-helper/setup-indoor-positioning.html">EstimoteIndoorHelper.setupIndoorPositioning</a> to quickly setup listeners between view, manager and beacon scanner.</p>
+You can use <a href="#">EstimoteIndoorHelper.setupIndoorPositioning</a> to quickly setup listeners between view, manager and beacon scanner.</p>
 <p><strong>See Also</strong><br/>
 <p><a href="../-on-position-update-listener/index.html">OnPositionUpdateListener</a></p>
 </p>
@@ -24,10 +24,20 @@ Pawel Dylag (pawel.dylag@estimote.com)</p>
 <tbody>
 <tr>
 <td>
-<p><a href="on-scanned-packets.html">onScannedPackets</a></p>
+<p><a href="on-scanned-beacon-packets.html">onScannedBeaconPackets</a></p>
 </td>
 <td>
-<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onScannedPackets</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.algorithm.IndoorLocationManager$onScannedPackets(kotlin.collections.List((com.estimote.coresdk.recognition.packets.EstimoteLocation)))/scannedPackets">scannedPackets</span><span class="symbol">:</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">EstimoteLocation</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onScannedBeaconPackets</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.algorithm.IndoorLocationManager$onScannedBeaconPackets(kotlin.collections.List((com.estimote.coresdk.recognition.packets.Beacon)))/beaconPackets">beaconPackets</span><span class="symbol">:</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">Beacon</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>This is probably the most important method here. Use it to pass scanned beacon data.
+You can do the scanning using our BeaconManager class.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-scanned-location-packets.html">onScannedLocationPackets</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onScannedLocationPackets</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.algorithm.IndoorLocationManager$onScannedLocationPackets(kotlin.collections.List((com.estimote.coresdk.recognition.packets.EstimoteLocation)))/locationPackets">locationPackets</span><span class="symbol">:</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">EstimoteLocation</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
 <p>This is probably the most important method here. Use it to pass scanned beacon data.
 You can do the scanning using our BeaconManager class.</p>
 </td>
@@ -70,7 +80,7 @@ Use this method to do this. Each consequent invocation of this function will ove
 <p><a href="create.html">create</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">create</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.algorithm.IndoorLocationManager.Companion$create(android.content.Context, com.estimote.indoorsdk.cloud.Location)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.estimote.indoorsdk.algorithm.IndoorLocationManager.Companion$create(android.content.Context, com.estimote.indoorsdk.cloud.Location)/rawLocation">rawLocation</span><span class="symbol">:</span>&nbsp;<a href="../../com.estimote.indoorsdk.cloud/-location/index.html"><span class="identifier">Location</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">IndoorLocationManager</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">create</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.algorithm.IndoorLocationManager.Companion$create(android.content.Context, com.estimote.indoorsdk.cloud.Location)/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.estimote.indoorsdk.algorithm.IndoorLocationManager.Companion$create(android.content.Context, com.estimote.indoorsdk.cloud.Location)/location">location</span><span class="symbol">:</span>&nbsp;<a href="../../com.estimote.indoorsdk.cloud/-location/index.html"><span class="identifier">Location</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">IndoorLocationManager</span></code></td>
 </tr>
 </tbody>
 </table>
