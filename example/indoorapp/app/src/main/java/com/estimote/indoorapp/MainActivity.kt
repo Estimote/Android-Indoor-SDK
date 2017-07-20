@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.estimote.coresdk.observation.region.beacon.BeaconRegion
 import com.estimote.coresdk.service.BeaconManager
 import com.estimote.indoorsdk.algorithm.IndoorLocationManager
 
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mIndoorLocationManager: IndoorLocationManager
     private lateinit var mLocation: Location
     private lateinit var mBeaconManager: BeaconManager
+    private val ALL_ESTIMOTE_BEACONS_BEACON_REGION = BeaconRegion("rid", null, null, null)
 
     companion object {
         val intentKeyLocationId = "location_id"
@@ -78,6 +80,12 @@ class MainActivity : AppCompatActivity() {
         mBeaconManager.connect {
             // When Beacon Manager has established connection with Service, then we start Location Packet Discovery
             mBeaconManager.startLocationDiscovery()
+
+            // FOR OLD PROXIMITY BEACONS:
+            // if you want to scan for iBeacon packets - i.e when you have old Proximity beacons (D3.4)
+            // then uncomment the line below:
+            // mBeaconManager.startRanging(ALL_ESTIMOTE_BEACONS_BEACON_REGION)
+
             // ... and inform the LocationManager to start doing it's magic :)
             mIndoorLocationManager.startPositioning()
         }
@@ -87,8 +95,14 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         // Stop discovery for Location packets
         mBeaconManager.stopLocationDiscovery()
+
+        // FOR OLD PROXIMITY BEACONS:
+        // don't forget to stop ranging here:
+        // mBeaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_BEACON_REGION)
+
         // Disconnect BeaconManager from underlying bluetooth Service
         mBeaconManager.disconnect()
+
         // ... and let LocationManager to stop also!
         mIndoorLocationManager.stopPositioning()
     }
