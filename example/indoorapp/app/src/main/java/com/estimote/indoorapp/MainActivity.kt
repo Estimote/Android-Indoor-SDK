@@ -19,10 +19,10 @@ import com.estimote.indoorsdk.view.IndoorLocationView
 class MainActivity : AppCompatActivity() {
 
 
-    private lateinit var mIndoorLocationView: IndoorLocationView
-    private lateinit var mIndoorLocationManager: IndoorLocationManager
-    private lateinit var mLocation: Location
-    private lateinit var mBeaconManager: BeaconManager
+    private lateinit var indoorLocationView: IndoorLocationView
+    private lateinit var indoorLocationManager: IndoorLocationManager
+    private lateinit var location: Location
+    private lateinit var beaconManager: BeaconManager
     private val ALL_ESTIMOTE_BEACONS_BEACON_REGION = BeaconRegion("rid", null, null, null)
 
     companion object {
@@ -42,32 +42,32 @@ class MainActivity : AppCompatActivity() {
         setupLocation()
 
         // Init indoor location view here
-        mIndoorLocationView = findViewById(R.id.indoor_view) as IndoorLocationView
+        indoorLocationView = findViewById(R.id.indoor_view) as IndoorLocationView
 
         // Give location object to your view to draw it on your screen
-        mIndoorLocationView.setLocation(mLocation)
+        indoorLocationView.setLocation(location)
 
         // Setup Beacon manager. It is necessary to do scanning for Location Packets advertised by your beacons.
-        mBeaconManager = BeaconManager(this)
+        beaconManager = BeaconManager(this)
 
         // Create IndoorManager object.
         // Long story short - it takes list of scanned beacons, does the magic and returns estimated position (x,y)
         // You need to setup it with your app context and location object
-        mIndoorLocationManager = IndoorLocationManager.create(applicationContext, mLocation)
+        indoorLocationManager = IndoorLocationManager.create(applicationContext, location)
 
         // Use helper below to quickly setup listeners between BeaconManager -> LocationManager -> LocationView
         // It also configures BeaconManager scanning with best scan times for indoor positioning.
         // CUSTOMIZATION - if you want to customize this setup, feel free to do it manually.
-        EstimoteIndoorHelper.setupIndoorPositioning(mBeaconManager, mIndoorLocationManager, mIndoorLocationView)
+        EstimoteIndoorHelper.setupIndoorPositioning(beaconManager, indoorLocationManager, indoorLocationView)
     }
 
     private fun setupLocation() {
         // get id of location to show from intent
         val locationId = intent.extras.getString(intentKeyLocationId)
         // get object of location. If something went wrong, we build empty location with no data.
-        mLocation = (application as IndoorApplication).locationsById[locationId] ?: buildEmptyLocation()
+        location = (application as IndoorApplication).locationsById[locationId] ?: buildEmptyLocation()
         // Set the Activity title to you location name
-        title = mLocation.name
+        title = location.name
     }
 
     private fun buildEmptyLocation(): Location {
@@ -77,33 +77,33 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // BeaconManager needs to connect to underlying Service, this is why we use connect() method first.
-        mBeaconManager.connect {
+        beaconManager.connect {
             // When Beacon Manager has established connection with Service, then we start Location Packet Discovery
-            mBeaconManager.startLocationDiscovery()
+            beaconManager.startLocationDiscovery()
 
             // FOR OLD PROXIMITY BEACONS:
             // if you want to scan for iBeacon packets - i.e when you have old Proximity beacons (D3.4)
             // then uncomment the line below:
-            // mBeaconManager.startRanging(ALL_ESTIMOTE_BEACONS_BEACON_REGION)
+            // beaconManager.startRanging(ALL_ESTIMOTE_BEACONS_BEACON_REGION)
 
             // ... and inform the LocationManager to start doing it's magic :)
-            mIndoorLocationManager.startPositioning()
+            indoorLocationManager.startPositioning()
         }
     }
 
     override fun onStop() {
         super.onStop()
         // Stop discovery for Location packets
-        mBeaconManager.stopLocationDiscovery()
+        beaconManager.stopLocationDiscovery()
 
         // FOR OLD PROXIMITY BEACONS:
         // don't forget to stop ranging here:
-        // mBeaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_BEACON_REGION)
+        // beaconManager.stopRanging(ALL_ESTIMOTE_BEACONS_BEACON_REGION)
 
         // Disconnect BeaconManager from underlying bluetooth Service
-        mBeaconManager.disconnect()
+        beaconManager.disconnect()
 
         // ... and let LocationManager to stop also!
-        mIndoorLocationManager.stopPositioning()
+        indoorLocationManager.stopPositioning()
     }
 }
