@@ -31,6 +31,15 @@ Pawel Dylag (pawel.dylag@estimote.com)</p>
 <tbody>
 <tr>
 <td>
+<p><a href="hide-position.html">hidePosition</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hidePosition</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Hides the position (user avatar) from view until the next <a href="update-position.html">updatePosition</a> is called.</p>
+</td>
+</tr>
+<tr>
+<td>
 <p><a href="on-draw.html">onDraw</a></p>
 </td>
 <td>
@@ -71,7 +80,7 @@ You can acquire <a href="../../com.estimote.indoorsdk.cloud/-location/index.html
 <p><a href="update-position.html">updatePosition</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">updatePosition</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.view.IndoorLocationView$updatePosition(com.estimote.indoorsdk.cloud.LocationPosition)/position">position</span><span class="symbol">:</span>&nbsp;<a href="../../com.estimote.indoorsdk.cloud/-location-position/index.html"><span class="identifier">LocationPosition</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<code><span class="keyword">fun </span><span class="identifier">updatePosition</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.view.IndoorLocationView$updatePosition(com.estimote.indoorsdk.cloud.LocationPosition)/newPosition">newPosition</span><span class="symbol">:</span>&nbsp;<a href="../../com.estimote.indoorsdk.cloud/-location-position/index.html"><span class="identifier">LocationPosition</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
 <p>Call this method when you get the position from <a href="../../com.estimote.indoorsdk.algorithm/-indoor-location-manager/index.html">IndoorLocationManager</a>.
 This will update user's icon position on this view.</p>
 </td>

@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ScanningIndoorLocationManager - estimote-indoor-sdk-android</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">estimote-indoor-sdk-android</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.indoorsdk.algorithm</a>&nbsp;/&nbsp;<a href=".">ScanningIndoorLocationManager</a><br/>
+<br/>
+<h1>ScanningIndoorLocationManager</h1>
+<code><span class="keyword">interface </span><span class="identifier">ScanningIndoorLocationManager</span></code>
+<p><strong>Author</strong><br/>
+Pawel Dylag (pawel.dylag@estimote.com)</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="set-on-position-update-listener.html">setOnPositionUpdateListener</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setOnPositionUpdateListener</span><span class="symbol">(</span><span class="identifier" id="com.estimote.indoorsdk.algorithm.ScanningIndoorLocationManager$setOnPositionUpdateListener(com.estimote.indoorsdk.algorithm.OnPositionUpdateListener)/onPositionUpdateListener">onPositionUpdateListener</span><span class="symbol">:</span>&nbsp;<a href="../-on-position-update-listener/index.html"><span class="identifier">OnPositionUpdateListener</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>In order to get estimated position from manager, you need to add listener to it.
+Use this method to do this. Each consequent invocation of this function will override previous listener.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="start-positioning.html">startPositioning</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">startPositioning</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Notifies Manager to start it's positioning algorithms. Make sure to call this method before starting scanning.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="stop-positioning.html">stopPositioning</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">stopPositioning</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Stops positioning algorithms. Make sure to use this method when you are not using positioning.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
