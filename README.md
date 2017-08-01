@@ -15,7 +15,7 @@ Add this line to your `build.gradle` file:
 
 ```gradle
 dependencies {
-  compile 'com.estimote:indoorsdk:0.10.0'
+  compile 'com.estimote:indoorsdk:1.0.0'
 }
 ```
 
@@ -97,56 +97,57 @@ indoorLocationView.setLocation(location);
 ```
 ## 5. Setting up indoor location manager
 `IndoorLocationManager` is the object that does all the magic to provide you with a user's estimated position.
-You need to initialize it with your application `Context` and—of course—`Location` objects.
+You need to initialize it with your application `Context` and—of course—`Location` objects. Using `withDefaultScanner()` will allow it to scan for beacons by itself - no additional work for you!
 ```Kotlin
 // KOTLIN
-indoorLocationManager = IndoorLocationManager.create(applicationContext, mLocation)
+indoorLocationManager = IndoorLocationManagerBuilder(this, mLocation)
+                .withDefaultScanner()
+                .build()
 ```
 ```Java
 // JAVA
-IndoorLocationManager indoorLocationManager =  IndoorLocationManager.Companion.create(this, location);
+ScanningIndoorLocationManager indoorLocationManager = 
+    new IndoorLocationManagerBuilder(this, location)
+    .withDefaultScanner()
+    .build();
 ```
+And don't forget to set a listener for positioning events!
 
-## 6. Setting up beacon manager
-In order for `IndoorLocationManager` to work properly, it needs to be fed data about the scanned beacons. And guess what? We'll use our `BeaconManager` for that!
 ```Kotlin
 // KOTLIN
-beaconManager = BeaconManager(this)
-```
-```Java
-// JAVA
-BeaconManager beaconManager = new BeaconManager(this);
+indoorLocationManager.setOnPositionUpdateListener(object : OnPositionUpdateListener {
+  override fun onPositionUpdate(locationPosition: LocationPosition) {
+    indoorLocationView.updatePosition(locationPosition)
+  }
+
+  override fun onPositionOutsideLocation() {
+    indoorLocationView.hidePosition()
+  }
+})
 ```
 
-## 7. Connect all the parts together
-So we now have separate objects for handling View drawing, position calculating, and beacon scanning. 
-Now we need to connect them all together to create a magical experience for your users!
-But don't worry, we are prepared for that! In most cases you should use our `EstimoteIndoorHelper` that sets up the data flow between all of the elements.
-```Kotlin
-// KOTLIN
-EstimoteIndoorHelper.setupIndoorPositioning(beaconManager, indoorLocationManager, indoorLocationView)
-```
 ```Java
 // JAVA
-EstimoteIndoorHelper.Companion.setupIndoorPositioning(beaconManager, indoorLocationManager, indoorLocationView);
-```
+indoorLocationManager.setOnPositionUpdateListener(new OnPositionUpdateListener() {
+  @Override
+  public void onPositionUpdate(LocationPosition locationPosition) {
+    indoorLocationView.updatePosition(locationPosition);
+  }
 
-## 8. Start!
+  @Override
+  public void onPositionOutsideLocation() {
+    indoorLocationView.hidePosition();
+  }
+});
+```
+## 6. Start!
 Now we're ready to start positioning. Use code like this in your Activity's `onStart` method:
 ```Kotlin
 // KOTLIN
 ...
 override fun onStart() {
   super.onStart()
-  // BeaconManager needs to connect to the underlying Service, 
-  // this is why we use connect() method first.
-  beaconManager.connect {
-  // After BeaconManager has established connection with Service, 
-  // we start Location Packet Discovery
-  beaconManager.startLocationDiscovery()
-  // ... and inform the LocationManager to start doing its magic :)
   indoorLocationManager.startPositioning()
-  }
 }
 ...
 ```
@@ -156,15 +157,7 @@ override fun onStart() {
 @Override
 protected void onStart() {
   super.onStart();
-  // BeaconManager needs to connect to the underlying Service,
-  // this is why we use connect() method first.
-  beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
-    @Override
-    public void onServiceReady() {
-      beaconManager.startLocationDiscovery();
-      indoorLocationManager.startPositioning();
-    }
-  });
+  indoorLocationManager.startPositioning();
 }
 ...
 ```
@@ -174,11 +167,6 @@ and don't forget to stop using the `onStop` method!
 ...
 override fun onStop() {
   super.onStop()
-  // Stop discovery for Location packet
-  beaconManager.stopLocationDiscovery()
-  // Disconnect BeaconManager from underlying bluetooth Service
-  beaconManager.disconnect()
-  // ... and let LocationManager stop, too!
   indoorLocationManager.stopPositioning() 
  }
 ...
@@ -189,11 +177,6 @@ override fun onStop() {
  @Override
   protected void onStop() {
     super.onStop();
-    // Stop discovery for Location packets
-    beaconManager.stopLocationDiscovery();
-    // Disconnect BeaconManager from underlying bluetooth Service
-    beaconManager.disconnect();
-    // ... and let LocationManager stop, too!
     indoorLocationManager.stopPositioning();
   }
 ...
