@@ -1,5 +1,10 @@
 Changelog
 =====================
+## 1.0.1 (Aug 8, 2017)
+- Fix: Do not crash when location contains beacons with custom colors
+- Cleanup SDK manifest to make it easier to use SDK in non-java-gradle android projects
+- Cleanup SDK resources to make it easier to use SDK in non-java-gradle android projects
+
 ## 1.0.0 (Aug 1, 2017)
 - Changed `IndoorLocationManager` creation api to builder pattern. Use `IndoorLocationManagerBuilder` for that. 
 - Added `ScanningIndoorLocationManager` which does all the scanning by itself. You can construct it using `.withDefaultScanner()` builder method. Otherwise you should feed the `IndoorLocationManager` with scans from `BeaconManager` all by yourself (setting up the listeners, managing scan start/stop etc)
