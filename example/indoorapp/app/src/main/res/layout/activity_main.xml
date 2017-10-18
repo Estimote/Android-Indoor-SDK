@@ -8,7 +8,7 @@
     tools:context="com.estimote.indoorapp.MainActivity">
 
 
-    <com.estimote.indoorsdk.view.IndoorLocationView
+    <com.estimote.indoorsdk_module.view.IndoorLocationView
         android:id="@+id/indoor_view"
         android:layout_height="match_parent"
         android:layout_width="match_parent"

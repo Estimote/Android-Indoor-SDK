@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.estimote.indoorsdk.cloud.Location
+import com.estimote.indoorsdk_module.cloud.Location
 
 /**
  * Adapter for list of locations

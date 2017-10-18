@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import com.estimote.coresdk.common.requirements.SystemRequirementsChecker
-import com.estimote.indoorsdk.cloud.Location
+import com.estimote.indoorsdk_module.cloud.Location
 
 /**
  * This is a simple activity to display all locations in list view.
