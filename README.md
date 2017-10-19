@@ -19,7 +19,7 @@ dependencies {
 }
 ```
 
-## 3. Fetching your location from Estimote Cloud
+## 2. Fetching your location from Estimote Cloud
 
 Use `IndoorCloudManagerFactory` to get objects for communicating with our cloud.
 You will need `Location` objects to start indoor positioning, so this step is really important.
@@ -60,7 +60,7 @@ IndoorCloudManager cloudManager = new IndoorCloudManagerFactory().create(this, c
 
 ```
 
-## 4. Adding indoor location view
+## 3. Adding indoor location view
 
 Use `IndoorLocationView` to display your location on screen. You need to put it in your activity's XML layout file.
 
@@ -87,7 +87,7 @@ indoorLocationView.setLocation(location)
 IndoorLocationView indoorLocationView = (IndoorLocationView) findViewById(R.id.indoor_view);
 indoorLocationView.setLocation(location);
 ```
-## 5. Setting up indoor location manager
+## 4. Setting up indoor location manager
 `IndoorLocationManager` is the object that does all the magic to provide you with a user's estimated position.
 You need to initialize it with your application `Context`, your `Location` object, and your `EstimoteCloudCredentials` (We suggest declaring them in a one place and use for both `IndoorLocationCloudManager` and `IndoorLocationManager`)  Using `withDefaultScanner()` will allow to scan for beacons automatically - no additional work for you!
 ```Kotlin
@@ -134,7 +134,7 @@ indoorLocationManager.setOnPositionUpdateListener(new OnPositionUpdateListener()
   }
 });
 ```
-## 6. Start!
+## 5. Start!
 Now we're ready to start positioning. Use code like this in your Activity's `onStart` method:
 ```Kotlin
 // KOTLIN
