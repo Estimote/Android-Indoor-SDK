@@ -5,12 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.estimote.indoorsdk.IndoorLocationManagerBuilder
 import com.estimote.indoorsdk_module.algorithm.OnPositionUpdateListener
 import com.estimote.indoorsdk_module.algorithm.ScanningIndoorLocationManager
 import com.estimote.indoorsdk_module.cloud.Location
 import com.estimote.indoorsdk_module.cloud.LocationPosition
 import com.estimote.indoorsdk_module.view.IndoorLocationView
+import com.estimote.mustard.rx_goodness.rx_requirements_wizard.RequirementsWizardFactory
 
 /**
  * Main view for indoor location
@@ -76,12 +78,21 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        // Start positioning in onCreate. Because we are using withScannerInForegroundService(...)
-        // The scanning will last until  indoorLocationManager.stopPositioning() be called.
-        // We call it in onDestroy().
-        // You can enable indoor positioning even when an app is killed, but you will need to start/stop
-        // positioning in your object that extends Application -> in case of this app, the IndoorApplication.kt file
-        indoorLocationManager.startPositioning()
+        // Check if bluetooth is enabled, location permissions are granted, etc.
+        RequirementsWizardFactory.createEstimoteRequirementsWizard()
+                .fulfillRequirements(this,
+                        onRequirementsFulfilled = {
+                            indoorLocationManager.startPositioning()
+                        },
+                        onRequirementsMissing = {
+                            Toast.makeText(applicationContext, "Unable to scan for beacons. Requirements missing: ${it.joinToString()}", Toast.LENGTH_SHORT)
+                                    .show()
+                        },
+                        onError = {
+                            Toast.makeText(applicationContext, "Unable to scan for beacons. Error: ${it.message}", Toast.LENGTH_SHORT)
+                            .show()
+                        })
+
     }
 
     private fun setupLocation() {

@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
-import com.estimote.coresdk.common.requirements.SystemRequirementsChecker
 import com.estimote.indoorsdk_module.cloud.Location
 
 /**
@@ -37,7 +36,6 @@ class LocationListActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        SystemRequirementsChecker.checkWithDefaultDialogs(this)
         val locations = (application as IndoorApplication).locationsById.values.toList()
         if (locations.isEmpty()) {
             mNoLocationsView.visibility = View.VISIBLE
