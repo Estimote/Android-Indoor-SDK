@@ -1,5 +1,23 @@
 Changelog
 =====================
+
+## 2.0.1 (Jan 3, 2018)
+- Added support for Android Oreo 8.1 (API 27)
+- Fixed a bug when disabled bluetooth were causing NPE.
+- Minor improvements to the scanning mechanism 
+
+## 2.0.0 (Oct 19, 2017)
+- Major changes to the scanning mechanism. 
+- Removed dependency on old SDK (with `BeaconManager` and stuff) and added `BluetoothScanner` as a main object for scanning beacons. 
+- Support for Android 7.0 and 8.0 
+- Now it is possible to scan beacons while your app is in the background. With additional work you may enable it to scan even when the app is killed - using our foreground service. 
+- Minor upgrades to the positioning algorithm. 
+- No more `EstimoteSDK.initiallize(appId, appToken)` - use `EstimoteCloudCredentials` instead. 
+- `IndoorLocationCloudManager` and `IndoorLocationManager` now require `EstimoteCloudCredentials` to communicate with Estimote Cloud. 
+- Added function `.distanceTo(locationPosition)` to `LocationPosition` class that will calculate the distance in meters. 
+- `DefaultRequirementsChecker` is no longer available. You may still use it, but you will need to compile our [old SDK](https://github.com/Estimote/Android-SDK). We will add the class with the same behaviour in the close future. 
+- Some major changes to the packages - you will only need to update imports. 
+
 ## 1.0.1 (Aug 8, 2017)
 - Fix: Do not crash when location contains beacons with custom colors
 - Cleanup SDK manifest to make it easier to use SDK in non-java-gradle android projects
