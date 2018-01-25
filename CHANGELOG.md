@@ -1,5 +1,9 @@
 Changelog
 =====================
+## 2.1.0 (Jan 25, 2018)
+- Make it possible to enable logging for Indor-SDK
+- Update newest scanner implementation
+- Minor fixes
 
 ## 2.0.1 (Jan 3, 2018)
 - Added support for Android Oreo 8.1 (API 27)
