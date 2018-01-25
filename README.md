@@ -15,7 +15,7 @@ Add this line to your `build.gradle` file:
 
 ```gradle
 dependencies {
-  compile 'com.estimote:indoorsdk:2.0.1'
+  compile 'com.estimote:indoorsdk:2.1.0'
 }
 ```
 
