@@ -28,8 +28,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:27.1.1'
     testCompile 'junit:junit:4.12'
 
-    compile 'com.estimote:indoorsdk:2.0.1'
-    compile 'com.estimote:mustard:0.2.0'
+    compile 'com.estimote:indoorsdk:2.4.0'
+    compile 'com.estimote:mustard:0.2.1'
 
     compile 'com.android.support:appcompat-v7:27.1.1'
     compile 'com.android.support.constraint:constraint-layout:1.1.0'

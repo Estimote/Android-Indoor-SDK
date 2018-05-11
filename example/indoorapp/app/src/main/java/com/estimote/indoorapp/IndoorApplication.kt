@@ -1,7 +1,7 @@
 package com.estimote.indoorapp
 
 import android.app.Application
-import com.estimote.cloud_plugin.common.EstimoteCloudCredentials
+import com.estimote.indoorsdk.EstimoteCloudCredentials
 import com.estimote.indoorsdk_module.cloud.Location
 
 /**
