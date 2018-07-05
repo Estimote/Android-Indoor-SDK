@@ -1,212 +1,86 @@
 # Estimote Indoor SDK for Android
 
-Estimote Indoor Location SDK allows real-time beacon-based mapping and indoor location.
+Estimote Indoor Location is a sophisticated software solution that makes it incredibly easy to define your position is indoor space and share it with others.
+You can use our SDK to visualize approximate position of all sdk's users within mapped space in real-time, in your own app.
 
-Estimote Indoor Location is a sophisticated software solution that makes it incredibly easy and quick to map any location. Once done, you can use our SDK to visualize your approximate position within that space in real-time, in your own app.
-
-Indoor Location creates a rich canvas upon which to build powerful new mobile experiences, from in-venue analytics and proximity marketing to frictionless payments and personalized shopping.
+Indoor Location allows you to easyly integrate with world-class standard maping engines like GoogleMaps to build powerful mobile experience from in-venue analytics and proximity marketing to frictionless payments and personalized shopping.
 
 Estimote Indoor Location works exclusively with Estimote Beacons.
 
-
 ## 1. Installation
 
-Add this line to your `build.gradle` file:
+Estimote Indoor Location SDK consists core indoor package and (optional) GoogleMaps rendering engine.
+To include both bundles in your build, add this lines to your `build.gradle` file:
 
 ```gradle
 dependencies {
-  compile 'com.estimote:indoorsdk:2.5.1'
+  // Core Estimote Indoor Location SDK
+  implementation 'com.estimote:indoorsdk:3.0.0-beta-01' 
+  // Optional GoogleMaps rendering Engine
+  implementation 'com.estimote:google-maps-renderer:3.0.0-beta-01' 
 }
 ```
 
-## 2. Fetching your location from Estimote Cloud
+## 2. Initializing Estimote SDK
 
-Use `IndoorCloudManagerFactory` to get objects for communicating with our cloud.
-You will need `Location` objects to start indoor positioning, so this step is really important.
-
-```Kotlin
-// KOTLIN
-val cloudCredentials = EstimoteCloudCredentials("YOUR APP ID HERE", "YOUR APP TOKEN HERE")
-val cloudManager = IndoorCloudManagerFactory().create(applicationContext, cloudCredentials)
-        
-cloudManager.getLocation("your location id here", object : CloudCallback<Location> {
-  override fun success(locations: Location?) {
-    // do something with your location here. You will need it to init IndoorManager and IndoorView           
-  }
-  
-  override fun failure(serverException: EstimoteCloudException?) {
-    // handle error here             
-  }
-})
-```
-```Java
-// JAVA
-CloudCredentials cloudCredentials = EstimoteCloudCredentials("YOUR APP ID HERE", "YOUR APP TOKEN HERE");
-IndoorCloudManager cloudManager = new IndoorCloudManagerFactory().create(this, cloudCredentials);
-  cloudManager.getLocation("your-location-id-here", new CloudCallback<Location>() {
-    @Override
-    public void success(Location location) {
-      // do something with your Location object here.
-      // You will need it to initialise IndoorLocationManager!
-      indoorLocationView = (IndoorLocationView) findViewById(R.id.indoor_view);
-      indoorLocationView.setLocation(location);
-    }
-
-    @Override
-    public void failure(EstimoteCloudException e) {
-      // oops!
-    }
-});
-
-```
-
-## 3. Adding indoor location view
-
-Use `IndoorLocationView` to display your location on screen. You need to put it in your activity's XML layout file.
-
-```xml
-...
-    <com.estimote.indoorsdk_module.view.IndoorLocationView
-        android:id="@+id/indoor_view"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:background="COLOR HERE/>
-...
-```
-Then you can simply bind this view to an object in your activity:
+To initialize Estimote Indoor Location SDK, collect your applicationID and applicationToken (available on [Estimote cloud](https://cloud.estimote.com/)) and  call handy static factory method as follows:
 
 ```Kotlin
-// KOTLIN
-indoorLocationView = findViewById(R.id.indoor_view) as IndoorLocationView
-// Don't forget to init view with your Location object!
-indoorLocationView.setLocation(location)
+//  To get your AppId and AppToken you need to create a new application in Estimote Cloud.
+ EstimoteIndoorSDK.create(applicationContext, <Your Application ID>, <Your Application Token>)
 ```
+ __*IMPORTANT:* To gain best possible performance, you should use single instance of EstimoteIndoorSDK across your application.__
 
-```Java
-// JAVA
-IndoorLocationView indoorLocationView = (IndoorLocationView) findViewById(R.id.indoor_view);
-indoorLocationView.setLocation(location);
-```
-## 4. Setting up indoor location manager
-`IndoorLocationManager` is the object that does all the magic to provide you with a user's estimated position.
-You need to initialize it with your application `Context`, your `Location` object, and your `EstimoteCloudCredentials` (We suggest declaring them in a one place and use for both `IndoorLocationCloudManager` and `IndoorLocationManager`)  Using `withDefaultScanner()` will allow to scan for beacons automatically - no additional work for you!
-```Kotlin
-// KOTLIN
-val cloudCredentials = EstimoteCloudCredentials("YOUR APP ID HERE", "YOUR APP TOKEN HERE")
-indoorLocationManager = IndoorLocationManagerBuilder(this, mLocation, cloudCredentials)
-                .withDefaultScanner()
-                .build()
-```
-```Java
-// JAVA
-CloudCredentials cloudCredentials = EstimoteCloudCredentials("YOUR APP ID HERE", "YOUR APP TOKEN HERE");
-ScanningIndoorLocationManager indoorLocationManager = 
-    new IndoorLocationManagerBuilder(this, location, cloudCredentials)
-    .withDefaultScanner()
-    .build();
-```
-And don't forget to set a listener for positioning events!
+## 3. Tracking your position
+Estimote Indoor Location SDK provides simple, conscise api to controll your position tracking and thus making it available for Estimote Indoor infrastructure.
+Initialize position tracking as follows:
 
-```Kotlin
-// KOTLIN
-indoorLocationManager.setOnPositionUpdateListener(object : OnPositionUpdateListener {
-  override fun onPositionUpdate(locationPosition: LocationPosition) {
-    indoorLocationView.updatePosition(locationPosition)
-  }
-
-  override fun onPositionOutsideLocation() {
-    indoorLocationView.hidePosition()
-  }
-})
-```
-
-```Java
-// JAVA
-indoorLocationManager.setOnPositionUpdateListener(new OnPositionUpdateListener() {
-  @Override
-  public void onPositionUpdate(LocationPosition locationPosition) {
-    indoorLocationView.updatePosition(locationPosition);
-  }
-
-  @Override
-  public void onPositionOutsideLocation() {
-    indoorLocationView.hidePosition();
-  }
-});
-```
-## 5. Start!
-Now we're ready to start positioning. Use code like this in your Activity's `onStart` method:
-```Kotlin
-// KOTLIN
-...
-override fun onStart() {
-  super.onStart()
-  indoorLocationManager.startPositioning()
-}
-...
-```
-```Java
-// JAVA
-...
-@Override
-protected void onStart() {
-  super.onStart();
-  indoorLocationManager.startPositioning();
-}
-...
-```
-and don't forget to stop using the `onStop` method!
-```Kotlin
-// KOTLIN
-...
-override fun onStop() {
-  super.onStop()
-  indoorLocationManager.stopPositioning() 
- }
-...
-```
-```Java
-// JAVA
-...
- @Override
-  protected void onStop() {
-    super.onStop();
-    indoorLocationManager.stopPositioning();
-  }
-...
-```
-## Scanning in the background
-Since version `2.0.0` it is possible to scan when the app is in the background (or even killed). For it to work, you need to display a notification to the user. This will ensure that the system won't eventually kill the scanning, and is necessary since the Android 8.0. Here is how to do this:
-1. Declare an notification object like this: 
 ``` Kotlin
-// KOTLIN
-val notification = Notification.Builder(this)
-              .setSmallIcon(R.drawable.notification_icon_background)
-              .setContentTitle("Indoor location")
-              .setContentText("Scan is running...")
-              .setPriority(Notification.PRIORITY_HIGH)
-              .build()
+  val trackingHandler = indoorSDK
+    .trackPosition()
+    .where(locationNamed("A1"))
+    .start()
+    
+    ....
+    
+    trackingHandler.stop()
 ```
 
-2. Use ` .withScannerInForegroundService(notification)` when building `IndoorLocationManager`:
-``` Kotlin
-// KOTLIN
-val cloudCredentials = EstimoteCloudCredentials("YOUR APP ID HERE", "YOUR APP TOKEN HERE")
-mIndoorLocationManager = IndoorLocationManagerBuilder(this, mLocation, cloudCredentiuals)
-              .withScannerInForegroundService(notification)
-              .build()
+What's going on here? Its pretty simple. EstimoteIndoorSDK class is you best friend here. you are starting all interaction with this class instance. To initate position tracking simply call `EstimoteIndoorSDK::trackPosition` method. This will give you posibility to configure tracking options and to start actual tracking process. Here are available posibilities:
+* `where(locationSelector: (EstimoteSimpleIndoorLocation)->Boolean)` - use this method to specify location you'd like the position to be track within. Core Estimote Location package delivers two handy predicates to be used here:
+  * `locationNamed(locationName: String)` - use it to specify location by its name
+  * `locatonWithIdentifier(locationId: String)` - use it to specify location by its identifer
+* `withErrorHandler(handler: IndoorErrorHandler)` - use it to specify callback to be called each time some error occurred during your location tracking
+* `withPositionUpdateInterval(intervalMillis: Long)` - use it to specify how fequently your position should be updated
+* `withOnOutsideLocation(action: () -> Unit)` - use it to specify action to be called each time you leave location the tracking was started in.
+* `withScannerInForegroundService(notification: Notification)` - use it to specify notification to be used by Estimote Indoor SDK. It will be used to ensure the all indoor features will keep up and running when your application go to background
+* `start()` - once everything is configured - start tracking. As a result, you'll get the `trackingHandler` instance. Use it to stop tracking process where you like.
+
+## 4. Presenting positions
+Estimote Indoor Location SDK allows you to easily present positions of all users with active tracking in place. 
+In other words - once some user starts his position tracking by calling `indoorSDK.trackPosition()...` api, you are able to view his position in realtime. Pure magic. Here's how to setup it:
+```Kotlin
+val locationPresenter = indoorSDK
+  .showPositions()
+  .where(locationNamed("A1"))
+  .withErrorHandler(IndoorErrorHandler { Log.d("My Fancy App", "locationPresenter error: $it") } )
+  .build( GoogleMapsEstimoteIndoorRenderer(googleMap) )
+  locationPresenter.start()
 ```
+Once again - You are starting with `EstimoteIndoorSDK` instance. This time you need to choose `showPositions()` method.
+This will allow you to configure presenting optons. Here's what available:
+* `where(locationSelector: (EstimoteSimpleIndoorLocation)->Boolean)` - just like in case of tracking, use it to specify location you'd like to be presented.
+* `withErrorHandler(handler: IndoorErrorHandler)` - use it to specify callback to be called each time some error occurred while location is presenting
+* `build(estimoteIndoorRenderer: EstimoteIndoorRenderer)` - this will create actual `EstimoteIndoorLocationPresenter` instance. You'll use it to dynamically controll presenting process. As a `build` method parameter, you need to specify the Rendering engine instance to be used to render location. If you included `com.estimote:google-maps-renderer` in you build gradle dependencies, then `GoogleMapsEstimoteIndoorRenderer` can be used (more details bellow).
 
-3. To scan while the user is not in your app (home button pressed) put `IndoorLocationManager` start/stop in `onCreate()`/`onDestroy()` of your **ACTIVITY**. 
-
-4. To scan even after the user has killed your app (swipe) put `IndoorLocationManager` start/stop in `onCreate()`/`onDestroy()` of your **CLASS EXTENDING APPLICATION CLASS**. You will also need to handle stopping scan through the Notification, because even though the user will destroy the activity, the Notification about scanning will still remain visible. You can play with it and see the behaviour by yourself. 
-
-## Documentation
-[Javadoc documentation is available here](https://estimote.github.io/Android-Indoor-SDK/docs/index.html)
+### Google Maps based renderering engine
+We are delivering super cool Indoor location renderning engin based on Google Maps technology. It is available with `com.estimote:google-maps-renderer` package. It leverages googleMaps object to allows you to display your location together with realtime positioning of all users inside. All You need to do to use it is to simply create `GoogleMapsEstimoteIndoorRenderer` instance passing GoogleMaps object as a constructor parameter. All super cool Estimote's Indoor features will be available on yor map. 
+Important thing to note is taht you have to initialise GoogleMaps on you own and pass it to Estimotes's framework.
+This is because Google requires application specific keys to be setup to make maps engine woriking propperly.
 
 ## Your feedback and questions
 At Estimote we're massive believers in feedback! Here are some common ways to share your thoughts with us:
-  - Posting issue/question/enhancement on our [issues page](https://github.com/Estimote/Android-indoor-SDK/issues).
+  - Posting issue/question/enhancement on our [issues page](https://github.com/Estimote/Android-SDK/issues).
   - Asking our community managers on our [Estimote SDK for Android forum](https://forums.estimote.com/c/android-sdk).
 
 ## Changelog
