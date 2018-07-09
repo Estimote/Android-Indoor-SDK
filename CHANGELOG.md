@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 2.1.2 (Jul 9, 2018)
+- Improved performance for small locations (8 or less beacons). 
+
 ## 2.1.0 (Jan 25, 2018)
 - Make it possible to enable logging for Indor-SDK
 - Update newest scanner implementation
