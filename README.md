@@ -76,7 +76,7 @@ This will allow you to configure presenting optons. Here's what available:
 * `withErrorHandler(handler: IndoorErrorHandler)` - use it to specify callback to be called each time an error has occurred while location is being presented.
 * `build(estimoteIndoorRenderer: EstimoteIndoorRenderer)` - this will create actual `EstimoteIndoorLocationPresenter` instance. You'll use it to dynamically control presenting process. As a `build` method parameter, you need to specify the rendering engine instance to be used to render location. If you included `com.estimote:google-maps-renderer` in you build gradle dependencies, then `GoogleMapsEstimoteIndoorRenderer` can be used (more details below).
 
-### Google Maps based renderering engine
+### Google Maps rendering engine
 We provide Indoor location renderning engine based on Google Maps API. It's available with `com.estimote:google-maps-renderer` package. It leverages `GoogleMap` object to allows you to display your location together with realtime positioning of all assets (users). 
 
 In order to use Google Maps create `GoogleMapsEstimoteIndoorRenderer` when building location presenter: `.build( GoogleMapsEstimoteIndoorRenderer(googleMap) )`
