@@ -14,9 +14,9 @@ To include both bundles in your build, add this lines to your `build.gradle` fil
 ```gradle
 dependencies {
   // Core Estimote Indoor Location SDK
-  implementation 'com.estimote:indoorsdk:3.0.0-beta-01' 
+  implementation 'com.estimote:indoorsdk:3.0.0-beta-03' 
   // Optional GoogleMaps rendering Engine
-  implementation 'com.estimote:google-maps-renderer:3.0.0-beta-01' 
+  implementation 'com.estimote:google-maps-renderer:3.0.0-beta-03' 
 }
 ```
 
@@ -65,6 +65,7 @@ In other words - once a user starts his position tracking by calling `indoorSDK.
 val locationPresenter = indoorSDK
   .showPositions()
   .where(locationNamed("A1"))
+  .withStyleResolver( YourStyleResolver )
   .withErrorHandler(IndoorErrorHandler { Log.d("My Fancy App", "locationPresenter error: $it") } )
   .build( GoogleMapsEstimoteIndoorRenderer(googleMap) )
   locationPresenter.start()
@@ -73,6 +74,7 @@ Once again - you are starting with `EstimoteIndoorSDK` instance. This time you n
 This will allow you to configure presenting optons. Here's what available:
 
 * `where(locationSelector: (EstimoteSimpleIndoorLocation)->Boolean)` - just like in case of tracking, use it to specify location you'd like to be presented.
+* `withStyleResolver( YourStyleResolver )` - use it to specify your custom implementation of the `EstimoteIndoorPresenterStyleResolver`. It will be used to resolve styles for renderer's visual components based on approproate events
 * `withErrorHandler(handler: IndoorErrorHandler)` - use it to specify callback to be called each time an error has occurred while location is being presented.
 * `build(estimoteIndoorRenderer: EstimoteIndoorRenderer)` - this will create actual `EstimoteIndoorLocationPresenter` instance. You'll use it to dynamically control presenting process. As a `build` method parameter, you need to specify the rendering engine instance to be used to render location. If you included `com.estimote:google-maps-renderer` in you build gradle dependencies, then `GoogleMapsEstimoteIndoorRenderer` can be used (more details below).
 
