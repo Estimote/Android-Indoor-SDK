@@ -204,6 +204,8 @@ mIndoorLocationManager = IndoorLocationManagerBuilder(this, mLocation, cloudCred
 ## Documentation
 [Javadoc documentation is available here](https://estimote.github.io/Android-Indoor-SDK/docs/index.html)
 
+If you want to read an overview of different Indoor algorithms or a detailed description of such, please go to [iOS Readme](https://github.com/Estimote/iOS-Indoor-SDK-Source/blob/master/README.md) and [docs](https://github.com/Estimote/iOS-Indoor-SDK-Source/tree/master/docs).
+
 ## Your feedback and questions
 At Estimote we're massive believers in feedback! Here are some common ways to share your thoughts with us:
   - Posting issue/question/enhancement on our [issues page](https://github.com/Estimote/Android-indoor-SDK/issues).
