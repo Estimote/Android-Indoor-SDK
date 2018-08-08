@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 2.1.3 (Aug 8, 2018)
+- Updated dependant libraries to be compartible with the rest of Estimote stack.
+
 ## 2.1.2 (Jul 9, 2018)
 - Improved performance for small locations (8 or less beacons). 
 
