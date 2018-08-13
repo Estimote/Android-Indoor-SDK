@@ -30,11 +30,11 @@ val cloudCredentials = EstimoteCloudCredentials("YOUR APP ID HERE", "YOUR APP TO
 val cloudManager = IndoorCloudManagerFactory().create(applicationContext, cloudCredentials)
         
 cloudManager.getLocation("your location id here", object : CloudCallback<Location> {
-  override fun success(locations: Location?) {
+  override fun success(locations: Location) {
     // do something with your location here. You will need it to init IndoorManager and IndoorView           
   }
   
-  override fun failure(serverException: EstimoteCloudException?) {
+  override fun failure(serverException: EstimoteCloudException) {
     // handle error here             
   }
 })
@@ -70,7 +70,7 @@ Use `IndoorLocationView` to display your location on screen. You need to put it 
         android:id="@+id/indoor_view"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:background="COLOR HERE/>
+        android:background="COLOR HERE"/>
 ...
 ```
 Then you can simply bind this view to an object in your activity:
