@@ -14,9 +14,9 @@ To include both bundles in your build, add this lines to your `build.gradle` fil
 ```gradle
 dependencies {
   // Core Estimote Indoor Location SDK
-  implementation 'com.estimote:indoorsdk:3.0.0-beta-03' 
+  implementation 'com.estimote:indoorsdk:3.0.0-beta-09' 
   // Optional GoogleMaps rendering Engine
-  implementation 'com.estimote:google-maps-renderer:3.0.0-beta-03' 
+  implementation 'com.estimote:google-maps-renderer:3.0.0-beta-09' 
 }
 ```
 
